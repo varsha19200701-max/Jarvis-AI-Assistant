@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 from groq import Groq
 from gtts import gTTS
 
-load_dotenv()
+load_dotenv(override=True)
 
 MODEL_NAME = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 TRANSCRIPTION_MODEL = os.getenv("GROQ_TRANSCRIPTION_MODEL", "whisper-large-v3-turbo")
@@ -172,4 +172,9 @@ with gr.Blocks(title="JARVIS AI Assistant") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(theme=gr.themes.Soft())
+    import os
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("PORT", 7860)),
+        theme=gr.themes.Soft()
+    )
