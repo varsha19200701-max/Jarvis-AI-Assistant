@@ -10,21 +10,58 @@ An AI-powered virtual assistant built using Python that allows users to interact
 
 Try the live application and interact with JARVIS through its Chat Assistant and Voice Assistant.
 
-> Replace `YOUR_RENDER_WEBSITE_URL` with your actual Render URL.
-
 ---
 
 ## 📌 Project Overview
 
-JARVIS AI Assistant is a beginner-friendly conversational AI application that provides two ways to interact:
+JARVIS AI Assistant is a **General-Purpose Conversational AI Assistant** designed to provide intelligent, interactive, and context-aware responses through both text and voice.
+
+It uses a Large Language Model (LLM) to understand user queries, process conversational context, and generate relevant AI-powered responses.
+
+The application provides two ways to interact:
 
 - **Web Chat:** Type a message and receive an AI-generated response.
 - **Web Voice Assistant:** Record a message using your browser microphone. JARVIS transcribes it, generates an answer, and plays a spoken reply.
-- **Conversation Context:** Recent messages are included so JARVIS can follow the ongoing conversation.
+- **Conversation Context:** Recent messages are sent along so JARVIS can follow the conversation and provide context-aware responses.
 
-AI responses are generated using the Groq API. Voice transcription uses Groq's Whisper transcription API, while spoken replies are generated using gTTS.
+### 🧠 What Can JARVIS Help With?
 
-> This is a conversational AI assistant. It does not control your computer or perform autonomous background tasks.
+JARVIS is designed to assist users with a variety of general-purpose queries, including:
+
+- **General Knowledge:** Questions about everyday topics, science, technology, and other subjects.
+- **Educational Assistance:** Understanding academic concepts and getting explanations of difficult topics.
+- **Programming Assistance:** Learning programming concepts, understanding code, and getting help with coding-related questions.
+- **Information and Explanations:** Getting explanations, summaries, and information on different subjects.
+- **Conversational Interaction:** Having natural conversations while maintaining recent conversation context.
+
+The quality and scope of responses depend on the underlying AI model.
+
+> JARVIS is a conversational AI assistant. It does not control your computer or perform autonomous background tasks.
+
+## 🤖 Large Language Model (LLM) Used
+
+**JARVIS is powered by OpenAI GPT-OSS 20B, accessed through the Groq API.**
+
+GPT-OSS 20B is an open-weight Large Language Model (LLM) that processes user queries and generates conversational AI responses.
+
+### LLM Configuration
+
+| Component | Technology |
+|---|---|
+| **LLM Model** | **OpenAI GPT-OSS 20B (`openai/gpt-oss-20b`)** |
+| AI Inference Provider | Groq API |
+| Voice Transcription Model | Groq Whisper (`whisper-large-v3-turbo`) |
+| Text-to-Speech | gTTS |
+| Interface | Gradio |
+
+### How the AI Components Work Together
+
+1. The user submits a question through text or voice.
+2. If voice input is used, Groq Whisper converts the recorded speech into text.
+3. The user's message and recent conversation history are sent to GPT-OSS 20B through the Groq API.
+4. The LLM processes the query and generates an appropriate response.
+5. If voice interaction is used, gTTS converts the generated response into spoken audio.
+6. The response is displayed or played in the browser.
 
 ## ✨ Key Features
 
@@ -41,7 +78,8 @@ AI responses are generated using the Groq API. Voice transcription uses Groq's W
 |---|---|
 | Python | Main programming language |
 | Gradio | Browser-based chat and voice interface |
-| Groq API | Generates AI responses |
+| OpenAI GPT-OSS 20B | Large Language Model used to generate AI responses |
+| Groq API | Provides access to the LLM for AI inference |
 | Groq Whisper | Converts recorded speech into text |
 | gTTS | Generates spoken audio replies |
 | python-dotenv | Loads environment variables |
@@ -156,9 +194,9 @@ The Groq API key is securely configured through Render Environment Variables.
 1. Gradio displays the chat and microphone controls in the browser.
 2. Typed messages are sent to the AI response function.
 3. Voice recordings are sent to Groq's Whisper transcription API.
-4. The recognized text is sent to the AI response function.
-5. Groq generates an AI response.
-6. gTTS converts the response into audio.
+4. The recognized words are sent to the same AI response function.
+5. GPT-OSS 20B generates an AI response through the Groq API.
+6. gTTS converts the response into an MP3 audio file.
 7. The browser plays JARVIS's spoken response.
 
 ## 🔐 Security Notes
